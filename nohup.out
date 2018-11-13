@@ -1,0 +1,21 @@
+ * Serving Flask app "index" (lazy loading)
+ * Environment: production
+   WARNING: Do not use the development server in a production environment.
+   Use a production WSGI server instead.
+ * Debug mode: on
+Traceback (most recent call last):
+  File "manage.py", line 20, in <module>
+    manager.run()
+  File "/usr/local/lib/python2.7/dist-packages/flask_script/__init__.py", line 417, in run
+    result = self.handle(argv[0], argv[1:])
+  File "/usr/local/lib/python2.7/dist-packages/flask_script/__init__.py", line 386, in handle
+    res = handle(*args, **config)
+  File "/usr/local/lib/python2.7/dist-packages/flask_script/commands.py", line 479, in __call__
+    **self.server_options)
+  File "/usr/local/lib/python2.7/dist-packages/flask/app.py", line 943, in run
+    run_simple(host, port, self, **options)
+  File "/usr/local/lib/python2.7/dist-packages/werkzeug/serving.py", line 795, in run_simple
+    s.bind(get_sockaddr(hostname, port, address_family))
+  File "/usr/lib/python2.7/socket.py", line 228, in meth
+    return getattr(self._sock,name)(*args)
+socket.error: [Errno 98] Address already in use

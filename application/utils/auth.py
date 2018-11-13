@@ -4,10 +4,10 @@ from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from itsdangerous import SignatureExpired, BadSignature
 from index import app
 
-TWO_WEEKS = 1209600
+ONE_WEEK = 604800 
 
 
-def generate_token(user, expiration=TWO_WEEKS):
+def generate_token(user, expiration=ONE_WEEK):
     s = Serializer(app.config['SECRET_KEY'], expires_in=expiration)
     token = s.dumps({
         'id': user.id,
@@ -31,7 +31,7 @@ def requires_auth(f):
         token = request.headers.get('Authorization', None)
         if token:
             string_token = token.encode('ascii', 'ignore')
-            user = verify_token(string_token)
+            user = verify_token(token)
             if user:
                 g.current_user = user
                 return f(*args, **kwargs)
