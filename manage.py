@@ -5,7 +5,7 @@ from application.app import app, db
 
 migrate = Migrate(app, db)
 manager = Manager(app)
-manager.add_command("runserver", Server(host="0.0.0.0", port=8080))
+#manager.add_command("runserver", Server(host="0.0.0.0", port=8080))
 
 # migrations
 manager.add_command('db', MigrateCommand)
