@@ -73,9 +73,3 @@ class Request(db.Model):
 	
 
 	#active feature, delete when passed
-
-
-class Todo(db.Model):
-        id = db.Column(db.Integer(), primary_key=True)
-	todo = db.Column(db.String)
-        user_id = db.Column(db.Integer, db.ForeignKey('user.id'))	
