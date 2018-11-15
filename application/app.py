@@ -24,8 +24,10 @@ def get_user():
 @app.route("/api/users/<int:id>", methods=["GET"])
 @requires_auth
 def get_user_name(id):
-    user_name = User.query.get(id).name
-    return jsonify(name=user_name)
+    current_user = User.query.get(id)
+    name = current_user.name
+    email = current_user.email
+    return jsonify({'id': id, 'name': name, 'email': email})
 
 @app.route("/api/users/active", methods=["GET"])
 @requires_auth
@@ -85,8 +87,8 @@ def create_offer():
 	return jsonify(message="Error in creating offer"), 403
     if len(incoming["passengers"]) <= offer.passenger:
         for x in incoming["passengers"]:
-	  passenger = User.query.get(x)
-	  offer.passenger_list.append(passenger)
+	    passenger = User.query.get(x)
+	    offer.passenger_list.append(passenger)
     elif len(incoming["passengers"]) >= offer.passenger:
 	return jsonify(message="Passengers are more than capacity!"), 403
     else:
@@ -124,8 +126,9 @@ def join():
     incoming = json_to_object["data"]
     entry = Offer.query.get(incoming["entry_id"])
     user = User.query.get(incoming["user_id"])
-    if len([entry.passenger_list]) <= entry.passenger:
-      return jsonify("Ride is full!"), 409
+    print(len(list(entry.passenger_list)))
+    if len(list(entry.passenger_list)) >= entry.passenger:
+        return jsonify("Ride is full!"), 409
     entry.passenger_list.append(user)
     try:
         db.session.commit()
@@ -172,6 +175,7 @@ def is_token_valid():
     incoming = request.get_json()
     decoded = verify_token(incoming["token"])
     is_valid = User.query.get(decoded['id'])
+    print(is_valid)
 
     if is_valid:
         return jsonify(token_is_valid=True)
