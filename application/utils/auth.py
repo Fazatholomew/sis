@@ -3,8 +3,22 @@ from flask import request, g, jsonify
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from itsdangerous import SignatureExpired, BadSignature
 from index import app
+import os
 
 ONE_WEEK = 604800 
+
+
+students_file = open(os.path.join(os.getcwd(), "application/utils/students.txt"), "r")
+faculties_file = open(os.path.join(os.getcwd(), "application/utils/faculties.txt"), "r")
+staff_file = open(os.path.join(os.getcwd(), "application/utils/staffs.txt"), "r")
+
+combined = [students_file, faculties_file, staff_file]
+emails_dict = {}
+
+
+for emails in combined:
+    for email in emails:
+	emails_dict[email] = True
 
 
 def generate_token(user, expiration=ONE_WEEK):
@@ -39,3 +53,7 @@ def requires_auth(f):
         return jsonify(message="Authentication is required to access this resource"), 401
 
     return decorated
+
+def email_check(uname):
+    emails = [uname + "@marlboro.edu", uname + "@gradschool.marlboro.edu"]
+    return emails_dict[emails[0]] or emails_dict[emails[1]]

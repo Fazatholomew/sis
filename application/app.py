@@ -2,7 +2,7 @@ from flask import request, render_template, jsonify, url_for, redirect, g
 from .models import User, Offer, Request
 from index import app, db
 from sqlalchemy.exc import IntegrityError
-from .utils.auth import generate_token, requires_auth, verify_token
+from .utils.auth import generate_token, requires_auth, verify_token, email_check
 from datetime import datetime
 from random import randint
 
@@ -140,13 +140,15 @@ def join():
 @app.route("/api/create_user", methods=["POST"])
 def create_user():
     incoming = request.get_json()
-    user = User(
-	name=incoming["name"],
-        email=incoming["email"],
-        password=incoming["password"]
-    )
-    db.session.add(user)
-
+    if email_check(incoming["email"]):
+    	user = User(
+	    name=incoming["name"],
+            email=incoming["email"],
+            password=incoming["password"]
+    	)
+    	db.session.add(user)
+    else: 
+	return jsonify(message="Username is not registered on Nook"), 409
     try:
         db.session.commit()
     except IntegrityError:
