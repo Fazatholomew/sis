@@ -18,6 +18,7 @@ emails_dict = {}
 
 for emails in combined:
     for email in emails:
+	email = email[:-1]
 	emails_dict[email] = True
 
 
