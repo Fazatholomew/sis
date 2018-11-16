@@ -56,4 +56,7 @@ def requires_auth(f):
 
 def email_check(uname):
     emails = [uname + "@marlboro.edu", uname + "@gradschool.marlboro.edu"]
-    return emails_dict[emails[0]] or emails_dict[emails[1]]
+    try:	
+    	return emails_dict[emails[0]] or emails_dict[emails[1]]
+    except KeyError:
+	return False
