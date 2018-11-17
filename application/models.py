@@ -72,7 +72,7 @@ class Request(db.Model):
 
 	@staticmethod
 	def get_all_requests():
-	  requests = Request.query.filter(Request.time >= (datetime.now() + 1000))
+	  requests = Request.query.filter(Request.time >= datetime.now().date())
 	  requests = {x.id: {'user_id': x.user_id, 'asal': x.asal, 'tujuan': x.tujuan, 'time': x.time, 'color': x.color} for x in requests}
 	  return requests
 	
