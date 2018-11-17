@@ -1,6 +1,7 @@
 #from index import db, bcrypt
 from index import db
 from werkzeug.security import generate_password_hash, check_password_hash
+from datetime import datetime
 
 offers_history_table = db.Table('offers_history_table',
 		db.Column('user_id', db.Integer, db.ForeignKey('user.id')),
@@ -56,7 +57,7 @@ class Offer(db.Model):
 
 	@staticmethod
 	def get_all_offers():
-	  offers = Offer.query.all()
+	  offers = Offer.query.filter(time.date() >= datetime.now().date())
 	  offers = {x.id: {'user_id': x.user_id, 'asal': x.asal, 'tujuan': x.tujuan, 'fee': x.fee, 'time': x.time, 'passenger': x.passenger, 'passengers': [y.id for y in x.passenger_list], 'color': x.color} for x in offers}
 	  return offers
 
@@ -71,7 +72,7 @@ class Request(db.Model):
 
 	@staticmethod
 	def get_all_requests():
-	  requests = Request.query.all()
+	  requests = Request.query.filter(time.date() >= datetime.now().date())
 	  requests = {x.id: {'user_id': x.user_id, 'asal': x.asal, 'tujuan': x.tujuan, 'time': x.time, 'color': x.color} for x in requests}
 	  return requests
 	

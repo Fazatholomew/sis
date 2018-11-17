@@ -175,11 +175,10 @@ def get_token():
 @app.route("/api/is_token_valid", methods=["POST"])
 def is_token_valid():
     incoming = request.get_json()
-    decoded = verify_token(incoming["token"])
-    is_valid = User.query.get(decoded['id'])
-    print(is_valid)
-
-    if is_valid:
-        return jsonify(token_is_valid=True)
-    else:
+    try:
+    	decoded = verify_token(incoming["token"])
+    	is_valid = User.query.get(decoded['id'])
+    	if is_valid:
+        	return jsonify(token_is_valid=True)
+    except TypeError:
         return jsonify(token_is_valid=False), 403
