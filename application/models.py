@@ -57,7 +57,7 @@ class Offer(db.Model):
 
 	@staticmethod
 	def get_all_offers():
-	  offers = Offer.query.filter(time.date() >= datetime.now().date())
+	  offers = Offer.query.filter(Offer.time.date() >= datetime.now().date())
 	  offers = {x.id: {'user_id': x.user_id, 'asal': x.asal, 'tujuan': x.tujuan, 'fee': x.fee, 'time': x.time, 'passenger': x.passenger, 'passengers': [y.id for y in x.passenger_list], 'color': x.color} for x in offers}
 	  return offers
 
@@ -72,7 +72,7 @@ class Request(db.Model):
 
 	@staticmethod
 	def get_all_requests():
-	  requests = Request.query.filter(time.date() >= datetime.now().date())
+	  requests = Request.query.filter(Request.time.date() >= datetime.now().date())
 	  requests = {x.id: {'user_id': x.user_id, 'asal': x.asal, 'tujuan': x.tujuan, 'time': x.time, 'color': x.color} for x in requests}
 	  return requests
 	
