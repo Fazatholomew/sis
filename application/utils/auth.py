@@ -59,10 +59,10 @@ def email_check(uname):
     emails = [uname + "@marlboro.edu", uname + "@gradschool.marlboro.edu"]
     try:
 	if bool(emails_dict[emails[0]]):
-		print(emails_dict[emails[0]] + " is a valid Email")	
+		print(str(mails_dict[emails[0]]) + " is a valid Email")	
     		return True
 	if bool(emails_dict[emails[1]]):
-		print(emails_dict[emails[1]] + " is a valid Email")
+		print(str(emails_dict[emails[1]]) + " is a valid Email")
 		return True
     except KeyError:
 	return False
