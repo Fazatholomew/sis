@@ -1,0 +1,21 @@
+import configureStore from 'redux-mock-store';
+import thunk from 'redux-thunk';
+
+import * as selectActions from '../../src/actions/apiActions';
+
+const middlewares = [thunk];
+const mockStore = configureStore(middlewares);
+
+describe('API Actions', () => {
+	it('gets request name', async (done) => {
+		const expectedActions = [{
+		'payload': {timestamp: 2000, loadTime: 1, data: {name: "Leanne Graham", passenger: 1}},
+		'type': 'GET_NAMES',
+		}];
+		const store = mockStore();
+		await store.dispatch(selectActions.getNames())
+		.then(() => {expect(store.getActions()).toEqual(expectedActions);})
+		done();
+	});
+  
+});

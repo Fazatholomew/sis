@@ -1,139 +1,81 @@
-# React-Redux-Flask #
-
-Boilerplate application for a Flask JWT Backend and a React/Redux Front-End with Material UI.
-
-* Python 2.7+ or 3.x
-* Pytest
-* Heroku
-* Flask
-* React
-* Redux
-* React-Router 2.0
-* React-Router-Redux
-* Babel 6
-* SCSS processing
-* Webpack
-
-![screenshot](http://i.imgur.com/ZIS4qkw.png)
-
-### Create DB
-```sh
-$ export DATABASE_URL="postgresql://username:password@localhost/mydatabase"
-
-or
-
-$ export DATABASE_URL="mysql+mysqlconnector://username:password@localhost/mydatabase"
-
-or
-
-$ export DATABASE_URL="sqlite:///your.db"
-```
-(More about connection strings in this [flask config guide](http://flask-sqlalchemy.pocoo.org/2.1/config/).)
-```
-$ python manage.py create_db
-$ python manage.py db upgrade
-$ python manage.py db migrate
-```
-
-To update database after creating new migrations, use:
-
-```sh
-$ python manage.py db upgrade
-```
-
-### Install Front-End Requirements
-```sh
-$ cd static
-$ npm install
-```
-
-### Run Back-End
-
-```sh
-$ python manage.py runserver
-```
-
-### Test Back-End
-
-```sh
-$ python test.py --cov-report=term --cov-report=html --cov=application/ tests/
-```
-
-### Run Front-End
-
-```sh
-$ cd static
-$ npm start
-```
-
-### Build Front-End
-
-```sh
-$ npm run build:production
-```
-
-### New to Python?
-
-If you are approaching this demo as primarily a frontend dev with limited or no python experience, you may need to install a few things that a seasoned python dev would already have installed.
-
-Most Macs already have python 2.7 installed but you may not have pip install. You can check to see if you have them installed:
-
-```
-$ python --version
-$ pip --version 
-```
-
-If pip is not installed, you can follow this simple article to [get both homebrew and python](https://howchoo.com/g/mze4ntbknjk/install-pip-on-mac-os-x)
-
-After you install python, you can optionally also install python 3
-
-```
-$ brew install python3
-```
-
-Now you can check again to see if both python and pip are installed. Once pip is installed, you can download the required flask modules:
-
-```
-$ sudo pip install flask flask_script flask_migrate flask_bcrypt 
-```
-
-Now, you can decide on which database you wish to use. 
-
-#### New to MySQL? 
-
-If you decide on MySQL, install the free community edition of [MySQL](https://dev.mysql.com/downloads/mysql/) and [MySQL Workbench](https://www.mysql.com/products/workbench/)
-
-1. start MySQL from the System Preferences
-2. open MySQL Workbench and [create a database](http://stackoverflow.com/questions/5515745/create-a-new-database-with-mysql-workbench) called mydatabase but don't create the tables since python will do that for you
-3. Install the MySQL connector for Python, add the DATABASE_URL configuration, and create the database and tables
-
-```
-$ sudo pip install mysql-connector-python-rf
-$ export DATABASE_URL="mysql+mysqlconnector://username:password@localhost/mydatabase"
-$ python manage.py create_db
-```
-
-Note: you do not need to run "python manage.py db upgrade" or "python manage.py db migrate" if its your first go at it
-
-4. Run Back-End
-
-```
-$ python manage.py runserver
-```
-
-If all goes well, you should see ```* Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)``` followed by a few more lines in the terminal.
-
-5. open a new tab to the same directory and run the front end
-
-```
-$ cd static
-$ npm install
-$ npm start
-```
-
-6. open your browser to http://localhost:3000/register and setup your first account
-7. enjoy! By this point, you should be able to create an account and login without errors. 
+## Webpack react minimal boilerplate
 
 
+> Minimal webpack and react boilerplate using latest version of react and babel as well as jest and enzyme for more details about technologies used. [click](#technologies-used) 
+> with real time server changes ;)
+
+> check out  [Medium article](https://medium.com/@hashem.khalifa/minimal-webpack-and-react-starter-boilerplate-seriously-d90a673e134f) for more details 
+
+![Real time change](https://cdn-images-1.medium.com/max/1600/1*0Slpwk3trmF7kLeoFp5UOw.gif)
+
+### Table of contents
+[Project structure](#project-structure)
+
+[Installation](#installation)
+
+[Configuration](#configuration)
+
+[Technologies used](#technologies-used)
+
+### Project structure
+
+````
+build/
+src/
+|- index.jsx _______________________________ # Application entry 
+|- App.jsx _________________________________ # Application init
+|  |- Components/
+|    |- hello-world/ 
+|       |- index.jsx _______________________ # Sample component
+
+webpack
+|- paths.js ________________________________ # webpack paths needed
+|- webpack.common.js _______________________ # common webpack config
+|- webpack.dev.js __________________________ # development config
+|- webpack.prod.js _________________________ # production config      
+````
 
 
+### Installation
+
+1- Clone the boilerplate repo
+
+`git clone git@github.com:HashemKhalifa/webpack-react-boilerplate.git`
+
+2- `yarn` or `npm install` to install npm packages
+
+3- start dev server using `yarn start` or `npm start`.
+
+3- build and bundling your resources for production `yarn build`.
+
+4- Unit testing will watch all your changes in the test files as well as create coverage folder for you. 
+`yarn test`
+
+
+### Configuration
+* Webpack Config paths based on your file structure you can go to `webpack/paths.js` and modify the source and file names based on your need.
+* `webpack/webpack.common.js` config common webpack for both dev and production environments.
+* webpack/webpack.dev.js config webpack for dev environment.
+* `webpack/webpack.prod.js` config webpack for production environment.
+* `/webpack.config.js` main webpack config that merge common and webpack environment based config.
+* Enzyme config `/setupTest.js` here you will have all setup for enzyme to test your component.
+* Prettier config `/.prettierc`.
+* Browsers list config `/.browserslistrc`.
+
+
+#### Technologies used
+
+
+* [Webpack 4](https://github.com/webpack/webpack) 
+* [Babel 7](https://github.com/babel/babel) [ transforming JSX and ES6,ES7,ES8 ]
+* [React](https://github.com/facebook/react) `16.5`
+* [Lodash](https://github.com/lodash/lodash)
+* [Jest](https://github.com/facebook/jest) [ Unit test]
+* [Enzyme](http://airbnb.io/enzyme/) for UI testing.
+* [Eslint](https://github.com/eslint/eslint/) with airbnb config
+* [Prettier](https://github.com/prettier/prettier) [ Code formatter ]
+* [Style](https://github.com/webpack-contrib/style-loader) & [CSS Loader](https://github.com/webpack-contrib/css-loader) & [SASS-loader](https://github.com/webpack-contrib/sass-loader)
+* [CSS modules](https://github.com/css-modules/css-modules) [ Isolated style based on each component ]
+* [Browsers list](https://github.com/browserslist/browserslist) [ Share target browsers between different front-end tools, like Autoprefixer, Stylelint and babel-preset-env ]
+* [React hot loader](https://github.com/gaearon/react-hot-loader)
+* [Webpack dev serve](https://github.com/webpack/webpack-dev-server) 
