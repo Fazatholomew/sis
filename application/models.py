@@ -41,7 +41,6 @@ class User(db.Model):
     def get_users():
 	users = User.query.all()
 	#users = users.append([User.query.filter([User.requests] > None).all()])
-	print(users)
 	return {x.id: {'name': x.name, 'email': x.email + '@marlboro.edu'} for x in users }
 
 

@@ -126,7 +126,6 @@ def join():
     incoming = json_to_object["data"]
     entry = Offer.query.get(incoming["entry_id"])
     user = User.query.get(incoming["user_id"])
-    print(len(list(entry.passenger_list)))
     if len(list(entry.passenger_list)) >= entry.passenger:
         return jsonify("Ride is full!"), 409
     entry.passenger_list.append(user)
@@ -148,11 +147,13 @@ def create_user():
     	)
     	db.session.add(user)
     else: 
-	return jsonify(message="Username is not registered on Nook"), 409
+	print(incoming["email"] + "is not on Nook!")
+	return jsonify(message="Username is not registered on Nook")
     try:
         db.session.commit()
     except IntegrityError:
-        return jsonify(message="User with that email already exists"), 409
+	print(incoming["email"] + "is already exists!")
+        return jsonify(message="User with that email already exists")
 
     new_user = User.query.filter_by(email=incoming["email"]).first()
 
@@ -181,4 +182,5 @@ def is_token_valid():
     	if is_valid:
         	return jsonify(token_is_valid=True)
     except TypeError:
-        return jsonify(token_is_valid=False), 403
+	print("Token Expired!") 
+        return jsonify(token_is_valid=False)
