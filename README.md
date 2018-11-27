@@ -2,7 +2,13 @@
 
 Marlboro College car-pooling website created by Faza Byandika Hikmatullah, Marlboro College student. Class 2021.
 
-The website will be a medium for those who need a ride, and for those who are willing to lend their car or drive people places.  
+The website will be a medium for those who need a ride, and for those who are willing to lend their car or drive people places.
+
+[Check out the website](https://sis-marlboro.surge.sh)
+
+[Launching Video](https://youtu.be/Czvx2_XFLwE)
+
+![Front-page](https://github.com/Fazatholomew/sis/blob/Development/Screen%20Shot%202018-11-27%20at%202.40.27%20PM.png)
 
 ## Why?
 
