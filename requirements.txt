@@ -67,7 +67,7 @@ SQLAlchemy==1.2.12
 st7036==1.4.3
 urllib3==1.13.1
 virtualenv==16.1.0
-Werkzeug==0.14.1
+Werkzeug==0.15.3
 wxPython==3.0.2.0
 wxPython-common==3.0.2.0
 youtube-dl==2016.2.22
