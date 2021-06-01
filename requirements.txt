@@ -65,7 +65,7 @@ sn3218==1.2.6
 spidev==3.0
 SQLAlchemy==1.2.12
 st7036==1.4.3
-urllib3==1.13.1
+urllib3==1.26.5
 virtualenv==16.1.0
 Werkzeug==0.14.1
 wxPython==3.0.2.0
